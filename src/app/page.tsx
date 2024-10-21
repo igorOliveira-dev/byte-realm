@@ -2,7 +2,7 @@ import MainPosts from "./components/MainPosts";
 
 export default function Home() {
   return (
-    <main className="p-12">
+    <main className="md:p-12">
       <h1 className="animated-gradient">
         Byte Realm <span className="no-necessary">- O seu portal de tecnologia</span>
       </h1>
