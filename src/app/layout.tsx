@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
+import { SanityContextProvider } from "./contexts/sanityContext";
 
 export const metadata: Metadata = {
   title: "Byte Realm - Home",
@@ -15,10 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body className="mt-24">
-        <Header />
-        {children}
-      </body>
+      <SanityContextProvider>
+        <body className="mt-24">
+          <Header />
+          {children}
+        </body>
+      </SanityContextProvider>
     </html>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,7 +37,9 @@ export default function Header() {
     <header
       className={`w-full blured-background p-2 px-4 flex justify-between fixed top-0 left-0 right-0 transition-transform duration-300 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
     >
-      <Image src="/logo.webp" height={80} width={78} alt="Logo" />
+      <Link href="/">
+        <Image src="/logo.webp" height={80} width={78} alt="Logo" />
+      </Link>
       <button onClick={toggleMenu} className="relative h-20 w-8">
         <span
           className={`block w-full h-1 bg-secondary mb-1 transition-transform duration-300 ${isMenuOpen ? "rotate-45 translate-y-2" : ""}`}
