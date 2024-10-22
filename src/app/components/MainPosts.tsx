@@ -22,7 +22,7 @@ export default function MainPosts() {
   }
 
   return (
-    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+    <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2">
       {posts.slice(0, 6).map((post) => (
         <PostCard key={post._id} post={post} href={`/posts/${post.slug.current}`} />
       ))}
