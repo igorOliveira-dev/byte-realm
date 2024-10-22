@@ -1,13 +1,7 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import Header from "./components/Header";
 import { SanityContextProvider } from "./contexts/sanityContext";
-
-export const metadata: Metadata = {
-  title: "Byte Realm - Home",
-  description:
-    "Bem vindo ao portal de tecnologia da internet, aqui você vê as tendências, notícias e tudo que precisa sobre o mundo tecnológico.",
-};
+import Head from "next/head";
 
 export default function RootLayout({
   children,
@@ -18,6 +12,14 @@ export default function RootLayout({
     <html lang="pt-br">
       <SanityContextProvider>
         <body className="mt-24">
+          <Head>
+            <title>Byte Realm - Home</title>
+            <meta
+              name="description"
+              content="Bem vindo ao portal de tecnologia da internet, aqui você vê as tendências, notícias e tudo que precisa sobre o mundo tecnológico."
+            />
+            <link rel="canonical" href="https://byterealm.vercel.app/" />
+          </Head>
           <Header />
           {children}
         </body>

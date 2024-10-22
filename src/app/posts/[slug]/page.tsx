@@ -64,10 +64,48 @@ const PostPage = () => {
         const post = await client.fetch(query, { slug });
         setPost(post);
       };
-
       fetchPost();
     }
   }, [slug]);
+
+  useEffect(() => {
+    if (post) {
+      const firstParagraph = post.body?.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
+      document.title = `${post.title} - Byte Realm`;
+
+      const setMetaTag = (name: string, content: string) => {
+        let tag = document.querySelector(`meta[name="${name}"]`);
+        if (!tag) {
+          tag = document.createElement("meta");
+          tag.setAttribute("name", name);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute("content", content);
+      };
+
+      const setMetaProperty = (property: string, content: string) => {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (!tag) {
+          tag = document.createElement("meta");
+          tag.setAttribute("property", property);
+          document.head.appendChild(tag);
+        }
+        tag.setAttribute("content", content);
+      };
+
+      setMetaTag("description", firstParagraph);
+      setMetaProperty("og:title", post.title);
+      setMetaProperty("og:description", firstParagraph);
+      setMetaProperty("og:image", post.mainImage?.asset?.url);
+
+      let linkCanonical = document.querySelector('link[rel="canonical"]');
+      if (!linkCanonical) {
+        linkCanonical = document.createElement("link");
+        linkCanonical.setAttribute("rel", "canonical");
+        document.head.appendChild(linkCanonical);
+      }
+    }
+  }, [post]);
 
   if (!post) {
     return <Loading />;
@@ -79,16 +117,16 @@ const PostPage = () => {
         <h1 className="text-3xl font-bold">{post.title}</h1>
         <p className="gray-text">{new Date(post.publishedAt).toLocaleDateString("pt-BR")}</p>
         <div className="flex items-center mt-2">
-          <img src={post.author.image.asset.url} alt={post.author.name} className="w-10 h-10 rounded-full mr-2" />
+          <Image src={post.author.image.asset.url} alt={post.author.name} height={35} width={35} className="rounded-full mr-2" />
           <p className="font-semibold">{post.author.name}</p>
         </div>
-        <div className="relative w-full md:w-1/2 h-52 mt-6">
+        <div className="relative w-full md:w-1/2 h-64 mt-6">
           <Image
-            layout="fill"
-            objectFit="cover"
+            fill
             src={post.mainImage.asset.url}
             alt={post.mainImage.alt}
             className=" w-full h-48 object-cover rounded-xl"
+            priority
           />
         </div>
       </header>
