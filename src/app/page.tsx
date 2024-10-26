@@ -1,4 +1,3 @@
-import Head from "next/head";
 import MainPosts from "./components/MainPosts";
 
 export const metadata = {

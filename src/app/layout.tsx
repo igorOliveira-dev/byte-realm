@@ -2,7 +2,6 @@ import "./globals.css";
 import Header from "./components/Header";
 import { SanityContextProvider } from "./contexts/sanityContext";
 import Footer from "./components/Footer";
-import Head from "next/head";
 
 export default function RootLayout({
   children,
@@ -11,9 +10,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <Head>
+      <head>
         <meta name="google-site-verification" content="epEjaq2OfjMrzM1lk7w6rN8etvZPDFC7M6oHsXbYwXQ" />
-      </Head>
+      </head>
       <SanityContextProvider>
         <body className="mt-24">
           <Header />
