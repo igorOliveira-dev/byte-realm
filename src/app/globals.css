@@ -87,6 +87,7 @@ h1 {
 h2 {
   font-size: 22px;
   font-weight: 600;
+  margin-top: 10px;
 }
 
 h3 {
@@ -157,4 +158,10 @@ h3 {
 
 .spin {
   animation: spin 1s ease-in-out infinite;
+}
+
+.blog-img-size {
+  max-width: 600px;
+  height: 40vw;
+  max-height: 260px;
 }

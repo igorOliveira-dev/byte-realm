@@ -1,4 +1,5 @@
 "use client";
+
 import { client } from "../../../sanity/lib/client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -72,35 +73,28 @@ const PostPage = () => {
       const firstParagraph = post.body?.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
       document.title = `${post.title} - Byte Realm`;
 
-      const setMetaTag = (name: string, content: string) => {
-        let tag = document.querySelector(`meta[name="${name}"]`);
-        if (!tag) {
-          tag = document.createElement("meta");
-          tag.setAttribute("name", name);
-          document.head.appendChild(tag);
-        }
-        tag.setAttribute("content", content);
-      };
+      const metaTags = [
+        { name: "description", content: firstParagraph || "" },
+        { property: "og:title", content: post.title || "" },
+        { property: "og:description", content: firstParagraph || "" },
+        { property: "og:image", content: post.mainImage?.asset?.url || "" },
+        { property: "og:type", content: "article" },
+        { name: "twitter:card", content: "summary_large_image" },
+        { name: "twitter:title", content: post.title || "" },
+        { name: "twitter:description", content: firstParagraph || "" },
+        { name: "twitter:image", content: post.mainImage?.asset?.url || "" },
+      ];
 
-      const setMetaProperty = (property: string, content: string) => {
-        let tag = document.querySelector(`meta[property="${property}"]`);
-        if (!tag) {
-          tag = document.createElement("meta");
-          tag.setAttribute("property", property);
-          document.head.appendChild(tag);
+      metaTags.forEach((meta) => {
+        const tag = document.createElement("meta");
+        if (meta.name) {
+          tag.setAttribute("name", meta.name);
+        } else if (meta.property) {
+          tag.setAttribute("property", meta.property);
         }
-        tag.setAttribute("content", content);
-      };
-
-      setMetaTag("description", firstParagraph);
-      setMetaProperty("og:title", post.title);
-      setMetaProperty("og:description", firstParagraph);
-      setMetaProperty("og:image", post.mainImage?.asset?.url);
-      setMetaProperty("og:type", "article");
-      setMetaTag("twitter:card", "summary_large_image");
-      setMetaTag("twitter:title", post.title);
-      setMetaTag("twitter:description", firstParagraph);
-      setMetaTag("twitter:image", post.mainImage?.asset?.url);
+        tag.setAttribute("content", meta.content);
+        document.head.appendChild(tag);
+      });
 
       let linkCanonical = document.querySelector('link[rel="canonical"]');
       if (!linkCanonical) {
@@ -109,6 +103,24 @@ const PostPage = () => {
         document.head.appendChild(linkCanonical);
       }
       linkCanonical.setAttribute("href", window.location.href);
+
+      return () => {
+        document.title = "Byte Realm - O seu portal de tecnologia";
+        metaTags.forEach((meta) => {
+          let tag;
+          if (meta.name) {
+            tag = document.querySelector(`meta[name="${meta.name}"]`);
+          } else if (meta.property) {
+            tag = document.querySelector(`meta[property="${meta.property}"]`);
+          }
+          if (tag) {
+            document.head.removeChild(tag);
+          }
+        });
+        if (linkCanonical) {
+          document.head.removeChild(linkCanonical);
+        }
+      };
     }
   }, [post]);
 
@@ -125,14 +137,8 @@ const PostPage = () => {
           <Image src={post.author.image.asset.url} alt={post.author.name} height={35} width={35} className="rounded-full mr-2" />
           <p className="font-semibold">{post.author.name}</p>
         </div>
-        <div className="relative w-full md:w-1/2 h-64 mt-6">
-          <Image
-            fill
-            src={post.mainImage.asset.url}
-            alt={post.mainImage.alt}
-            className="w-full h-48 object-cover rounded-xl"
-            priority
-          />
+        <div className="relative mt-6 flex items-start blog-img-size">
+          <Image fill src={post.mainImage.asset.url} alt={post.mainImage.alt} className="object-fit rounded-xl" priority />
         </div>
       </header>
       <div className="mt-6">
