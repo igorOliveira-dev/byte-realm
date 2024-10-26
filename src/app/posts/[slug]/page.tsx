@@ -1,5 +1,4 @@
 "use client";
-
 import { client } from "../../../sanity/lib/client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -69,19 +68,29 @@ const PostPage = () => {
   }, [slug]);
 
   useEffect(() => {
-    if (post && post.title && post.body && post.mainImage?.asset?.url) {
-      const firstParagraph = post.body?.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
+    if (post) {
+      const firstParagraph = post.body.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
+      const secondParagraph =
+        post.body.slice(1).find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
+
       document.title = `${post.title} - Byte Realm`;
 
+      // Remove existing meta tags
+      const oldMetaTags = document.querySelectorAll(
+        'meta[name="description"], meta[property="og:title"], meta[property="og:description"], meta[property="og:image"], meta[name="twitter:card"], meta[name="twitter:title"], meta[name="twitter:description"], meta[name="twitter:image"]'
+      );
+      oldMetaTags.forEach((tag) => tag.parentNode?.removeChild(tag));
+
+      // Add new meta tags
       const metaTags = [
-        { name: "description", content: firstParagraph || "" },
+        { name: "description", content: secondParagraph || "" },
         { property: "og:title", content: post.title || "" },
-        { property: "og:description", content: firstParagraph || "" },
+        { property: "og:description", content: secondParagraph || "" },
         { property: "og:image", content: post.mainImage?.asset?.url || "" },
         { property: "og:type", content: "article" },
         { name: "twitter:card", content: "summary_large_image" },
         { name: "twitter:title", content: post.title || "" },
-        { name: "twitter:description", content: firstParagraph || "" },
+        { name: "twitter:description", content: secondParagraph || "" },
         { name: "twitter:image", content: post.mainImage?.asset?.url || "" },
       ];
 
@@ -107,12 +116,7 @@ const PostPage = () => {
       return () => {
         document.title = "Byte Realm - O seu portal de tecnologia";
         metaTags.forEach((meta) => {
-          let tag;
-          if (meta.name) {
-            tag = document.querySelector(`meta[name="${meta.name}"]`);
-          } else if (meta.property) {
-            tag = document.querySelector(`meta[property="${meta.property}"]`);
-          }
+          const tag = document.querySelector(`meta[${meta.name ? "name" : "property"}="${meta.name || meta.property}"]`);
           if (tag) {
             document.head.removeChild(tag);
           }
