@@ -1,5 +1,10 @@
 import MainPosts from "./components/MainPosts";
 
+export const metadata = {
+  title: "Home - Byte Realm",
+  description: "Bem vindo ao Byte Realm - O seu portal de tecnologia",
+};
+
 export default function Home() {
   return (
     <main className="p-4 md:p-12">

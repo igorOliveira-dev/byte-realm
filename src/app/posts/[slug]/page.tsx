@@ -1,5 +1,4 @@
 "use client";
-
 import { client } from "../../../sanity/lib/client";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -69,7 +68,7 @@ const PostPage = () => {
   }, [slug]);
 
   useEffect(() => {
-    if (post) {
+    if (post && post.title && post.body && post.mainImage?.asset?.url) {
       const firstParagraph = post.body?.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
       document.title = `${post.title} - Byte Realm`;
 
@@ -97,6 +96,11 @@ const PostPage = () => {
       setMetaProperty("og:title", post.title);
       setMetaProperty("og:description", firstParagraph);
       setMetaProperty("og:image", post.mainImage?.asset?.url);
+      setMetaProperty("og:type", "article");
+      setMetaTag("twitter:card", "summary_large_image");
+      setMetaTag("twitter:title", post.title);
+      setMetaTag("twitter:description", firstParagraph);
+      setMetaTag("twitter:image", post.mainImage?.asset?.url);
 
       let linkCanonical = document.querySelector('link[rel="canonical"]');
       if (!linkCanonical) {
@@ -104,6 +108,7 @@ const PostPage = () => {
         linkCanonical.setAttribute("rel", "canonical");
         document.head.appendChild(linkCanonical);
       }
+      linkCanonical.setAttribute("href", window.location.href);
     }
   }, [post]);
 
@@ -125,7 +130,7 @@ const PostPage = () => {
             fill
             src={post.mainImage.asset.url}
             alt={post.mainImage.alt}
-            className=" w-full h-48 object-cover rounded-xl"
+            className="w-full h-48 object-cover rounded-xl"
             priority
           />
         </div>
