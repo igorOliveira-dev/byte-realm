@@ -75,9 +75,14 @@ export default function Header() {
       </header>
       <div ref={menuRef} className={`menu blured-background ${isMenuOpen ? "menu" : "menu-off"}`}>
         <ul>
-          <li className="my-6 mx-2">
+          <li className="my-6 mb-8 mx-2">
             <a href="/" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
               Home
+            </a>
+          </li>
+          <li className="my-6 mb-8 mx-2">
+            <a href="contato" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
+              Contato
             </a>
           </li>
         </ul>

@@ -29,6 +29,11 @@ body {
   overflow-x: hidden;
 }
 
+.only-screen {
+  max-height: calc(100vh - (152px));
+  overflow-y: hidden;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
