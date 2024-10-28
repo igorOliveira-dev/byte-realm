@@ -2,7 +2,7 @@ import MainPosts from "./components/MainPosts";
 
 export const metadata = {
   title: "Home - Byte Realm",
-  description: "Bem vindo ao Byte Realm, o seu portal de tecnologia que você encontra tudo sobre o mundo moderno!",
+  description: "Bem vindo ao Byte Realm, o seu portal de tecnologia que você encontra tudo sobre o mundo tecnológico!",
   alternates: {
     canonical: "https://byterealm.vercel.app",
   },

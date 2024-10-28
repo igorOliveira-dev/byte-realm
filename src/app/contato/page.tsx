@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Contato - Byte Realm",
+  description: "Página de contato do Byte Realm, o seu portal de tecnologia que te fala tudo do mundo tecnológico.",
+  alternates: {
+    canonical: "https://byterealm.vercel.app/contato",
+  },
+};
+
 export default function Contato() {
   return (
     <main className="flex flex-col items-center justify-center p-4 only-screen">
