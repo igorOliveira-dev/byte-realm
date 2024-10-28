@@ -29,6 +29,10 @@ body {
   overflow-x: hidden;
 }
 
+p {
+  margin-bottom: 10px;
+}
+
 .only-screen {
   max-height: calc(100vh - (152px));
   overflow-y: hidden;

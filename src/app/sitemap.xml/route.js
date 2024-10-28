@@ -12,6 +12,11 @@ export async function GET(request) {
       changefreq: "daily",
       priority: 1.0,
     },
+    {
+      loc: "https://byterealm.vercel.app/contato",
+      lastmod: new Date().toISOString(),
+      priority: 0.4,
+    },
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?> 

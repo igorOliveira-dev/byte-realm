@@ -81,7 +81,7 @@ export default function Header() {
             </a>
           </li>
           <li className="my-6 mb-8 mx-2">
-            <a href="contato" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
+            <a href="/contato" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
               Contato
             </a>
           </li>
