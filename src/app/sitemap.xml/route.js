@@ -15,6 +15,7 @@ export async function GET(request) {
     {
       loc: "https://byterealm.vercel.app/contato",
       lastmod: new Date().toISOString(),
+      changefreq: "yearly",
       priority: 0.4,
     },
   ];
