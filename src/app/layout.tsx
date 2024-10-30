@@ -2,16 +2,16 @@ import "./globals.css";
 import Header from "./components/Header";
 import { SanityContextProvider } from "./contexts/sanityContext";
 import Footer from "./components/Footer";
-import { Html, NextScript } from "next/document";
+import Head from "next/head";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID;
 const GOOGLE_SITE_VERIFICATION = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <Html lang="pt-br">
-      <head>
-        {/* varificação do Google Search Console */}
+    <html lang="pt-br">
+      <Head>
+        {/* Google Search verification */}
         <meta name="google-site-verification" content={GOOGLE_SITE_VERIFICATION} />
         {/* Google tag (gtag.js) */}
         <script async src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}></script>
@@ -25,15 +25,14 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             `,
           }}
         />
-      </head>
+      </Head>
       <SanityContextProvider>
         <body className="mt-24">
           <Header />
           {children}
           <Footer />
-          <NextScript />
         </body>
       </SanityContextProvider>
-    </Html>
+    </html>
   );
 }
