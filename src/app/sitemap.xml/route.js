@@ -9,7 +9,7 @@ export async function GET(request) {
     {
       loc: "https://byterealm.vercel.app",
       lastmod: new Date().toISOString(),
-      changefreq: "daily",
+      changefreq: "weekly",
       priority: 1.0,
     },
     {
