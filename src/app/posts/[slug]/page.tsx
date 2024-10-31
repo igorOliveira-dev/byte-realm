@@ -192,7 +192,7 @@ const PostPage = () => {
           />
         </div>
       </header>
-      <div className="mt-6">
+      <div className="mt-6 post-body">
         <PortableText value={post.body} components={PortableTextComponents} />
       </div>
     </main>
