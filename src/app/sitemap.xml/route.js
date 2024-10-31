@@ -39,7 +39,7 @@ export async function GET(request) {
         <url> 
           <loc>${`https://byterealm.vercel.app/posts/${post.slug}`}</loc> 
           <lastmod>${post._updatedAt}</lastmod> 
-          <changefreq>monthly</changefreq> 
+          <changefreq>yearly</changefreq> 
           <priority>0.7</priority>
         </url>`;
       })
