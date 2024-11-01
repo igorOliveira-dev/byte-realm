@@ -85,6 +85,11 @@ export default function Header() {
               Contato
             </a>
           </li>
+          <li className="my-6 mb-8 mx-2">
+            <a href="/politica-privacidade" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
+              Política de privacidade
+            </a>
+          </li>
         </ul>
       </div>
     </>
