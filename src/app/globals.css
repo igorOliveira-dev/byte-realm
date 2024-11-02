@@ -40,6 +40,14 @@ body {
   overflow-y: hidden;
 }
 
+.post-body > ul {
+  list-style-type: disc;
+}
+
+.post-body > ul > li {
+  margin: 6px;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

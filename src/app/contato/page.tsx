@@ -14,7 +14,7 @@ export default function Contato() {
         <p className="text-lg mb-4 text-center">
           Para entrar em contato com a equipe Byte Realm, basta enviar uma mensagem ao email abaixo:
         </p>
-        <a href="mailto:byteralm.contact@gmail.com" className="text-lg text-blue-500 hover:underline text-center block">
+        <a href="mailto:byterealm.contact@gmail.com" className="text-lg text-blue-500 hover:underline text-center block">
           byterealm.contact@gmail.com
         </a>
       </div>
