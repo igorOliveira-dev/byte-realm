@@ -17,7 +17,7 @@ export default function Home() {
       <h2 className="typewriter">Aqui você encontra as ultimas tendências do mundo tecnológico.</h2>
       <section className="my-6 min-w-full">
         <h2>Principais posts:</h2>
-        <MainPosts />
+        <MainPosts currentPostId={"/"} />
       </section>
     </main>
   );

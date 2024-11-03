@@ -1,10 +1,21 @@
 "use client";
+import { useEffect, useContext } from "react";
 import Loading from "../Loading";
-import { useContext } from "react";
 import { SanityContext } from "../contexts/sanityContext";
 import PostCard from "../components/PostCard";
 
-export default function MainPosts() {
+interface Post {
+  _id: string;
+  slug: {
+    current: string;
+  };
+}
+
+interface MainPostsProps {
+  currentPostId: string;
+}
+
+export default function MainPosts({ currentPostId }: MainPostsProps) {
   const sanityContext = useContext(SanityContext);
 
   if (!sanityContext) {
@@ -23,9 +34,12 @@ export default function MainPosts() {
 
   return (
     <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2">
-      {posts.slice(0, 6).map((post) => (
-        <PostCard key={post._id} post={post} href={`/posts/${post.slug.current}`} />
-      ))}
+      {posts
+        .filter((post) => post._id !== currentPostId)
+        .slice(0, 6)
+        .map((post) => (
+          <PostCard key={post._id} post={post} href={`/posts/${post.slug.current}`} />
+        ))}
     </div>
   );
 }

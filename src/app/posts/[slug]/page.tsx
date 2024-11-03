@@ -7,6 +7,7 @@ import Image from "next/image";
 import { PortableText, PortableTextProps } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
+import MainPosts from "@/app/components/MainPosts";
 
 const builder = imageUrlBuilder(client);
 
@@ -194,6 +195,11 @@ const PostPage = () => {
       </header>
       <div className="mt-6 post-body">
         <PortableText value={post.body} components={PortableTextComponents} />
+      </div>
+      <hr />
+      <div className="my-6">
+        <h3>Principais posts:</h3>
+        <MainPosts currentPostId={post._id} />
       </div>
     </main>
   );
