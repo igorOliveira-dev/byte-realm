@@ -2,6 +2,8 @@
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -57,40 +59,41 @@ export default function Header() {
         <Link href="/">
           <Image src="/logo.webp" height={80} width={78} alt="Logo" priority />
         </Link>
-        <button ref={hamburgerRef} onClick={toggleMenu} className="relative h-20 w-8">
-          <span
-            className={`block w-full h-1 bg-secondary mb-1 transition-transform duration-300 ${
-              isMenuOpen ? "rotate-45 translate-y-2" : ""
-            }`}
-          ></span>
-          <span
-            className={`block w-full h-1 bg-secondary mb-1 transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : ""}`}
-          ></span>
-          <span
-            className={`block w-full h-1 bg-secondary transition-transform duration-300 ${
-              isMenuOpen ? "-rotate-45 -translate-y-2" : ""
-            }`}
-          ></span>
-        </button>
+        <div className="flex items-center">
+          <Link href="/pesquisa" className="p-4 mr-6 hover-bg rounded-xl">
+            <FontAwesomeIcon icon={faSearch} className="mr-2 h-4" />
+            Pesquisa
+          </Link>
+          <button ref={hamburgerRef} onClick={toggleMenu} className="relative h-20 w-8">
+            <span
+              className={`block w-full h-1 bg-secondary mb-1 transition-transform duration-300 ${
+                isMenuOpen ? "rotate-45 translate-y-2" : ""
+              }`}
+            ></span>
+            <span
+              className={`block w-full h-1 bg-secondary mb-1 transition-opacity duration-300 ${isMenuOpen ? "opacity-0" : ""}`}
+            ></span>
+            <span
+              className={`block w-full h-1 bg-secondary transition-transform duration-300 ${
+                isMenuOpen ? "-rotate-45 -translate-y-2" : ""
+              }`}
+            ></span>
+          </button>
+        </div>
       </header>
-      <div ref={menuRef} className={`menu blured-background ${isMenuOpen ? "menu" : "menu-off"}`}>
-        <ul>
-          <li className="my-6 mb-8 mx-2">
-            <a href="/" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
-              Home
-            </a>
-          </li>
-          <li className="my-6 mb-8 mx-2">
-            <a href="/contato" className="p-4 w-200 pr-28 hover-bg rounded-xl border-b custom-border-color">
-              Contato
-            </a>
-          </li>
-          <li className="my-6 mb-8 mx-2">
-            <a href="/politica-privacidade" className="p-4 w-200 hover-bg rounded-xl border-b custom-border-color">
-              Política de privacidade
-            </a>
-          </li>
-        </ul>
+      <div ref={menuRef} className={`menu blured-background ${isMenuOpen ? "menu" : "menu-off"} flex flex-col`}>
+        <a href="/" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
+          Home
+        </a>
+        <a href="/pesquisa" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
+          Pesquisa
+        </a>
+        <a href="/contato" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
+          Contato
+        </a>
+        <a href="/politica-privacidade" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
+          Política de privacidade
+        </a>
       </div>
     </>
   );
