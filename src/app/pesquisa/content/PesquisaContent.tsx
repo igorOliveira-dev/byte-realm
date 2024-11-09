@@ -20,7 +20,8 @@ export default function PesquisaContent() {
 
   const filteredPosts = searchQuery ? posts.filter((post) => post.title.toLowerCase().includes(searchQuery.toLowerCase())) : [];
 
-  const errorMessage = filteredPosts.length === 0 && searchQuery ? "Nenhum post encontrado." : "Pesquise por algum post.";
+  const errorMessage =
+    filteredPosts.length === 0 && searchQuery ? "Nenhum post encontrado." : searchQuery ? "" : "Pesquise por algum post";
 
   return (
     <div className="p-4 md:p-12 only-screen">
@@ -31,7 +32,7 @@ export default function PesquisaContent() {
         onChange={(e) => setSearchQuery(e.target.value)}
         className="md:w-1/3 w-full mb-4 p-4 rounded-xl input-color"
       />
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 mt-2">
+      <div className="grid grid-cols-1 gap-8 mt-2 xl:grid-cols-2 xl:gap-12">
         {filteredPosts.map((post) => (
           <PostCard key={post._id} post={post} href={`/posts/${post.slug.current}`} />
         ))}

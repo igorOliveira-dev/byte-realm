@@ -38,7 +38,7 @@ const PostCard = ({ post, href }: { post: Post; href: string }) => {
             <img
               src={post.author.image.asset.url}
               alt={post.author.name}
-              className="w-10 h-10 rounded-full mr-4 custom-border-color"
+              className="w-10 h-10 rounded-full mr-4 border custom-border-color"
             />
             <div>
               <p className="font-semibold">{post.author.name}</p>
