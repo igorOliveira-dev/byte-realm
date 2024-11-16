@@ -33,7 +33,7 @@ export default function MainPosts({ currentPostId }: MainPostsProps) {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-8 mt-2 xl:grid-cols-2 xl:gap-12">
+    <div className="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-2 xl:gap-12">
       {posts
         .filter((post) => post._id !== currentPostId)
         .slice(0, 6)
