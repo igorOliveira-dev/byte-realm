@@ -176,7 +176,7 @@ const PostPage = () => {
   return (
     <main className="p-4 md:mx-24">
       <header>
-        <h1 className="text-3xl font-bold">{post.title}</h1>
+        <h1 className="text-4xl font-bold">{post.title}</h1>
         <p className="gray-text">{new Date(post.publishedAt).toLocaleDateString("pt-BR")}</p>
         <div className="flex items-center mt-2">
           <Image src={post.author.image.asset.url} alt={post.author.name} height={35} width={35} className="rounded-full mr-2" />
@@ -184,8 +184,8 @@ const PostPage = () => {
         </div>
         <div className="relative mt-6 flex items-start blog-img-size">
           <Image
-            fill
-            sizes="(max-width: 768px) 100vw, 768px"
+            width={600}
+            height={300}
             src={post.mainImage.asset.url}
             alt={post.mainImage.alt}
             className="object-fit rounded-xl"

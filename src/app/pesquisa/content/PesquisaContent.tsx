@@ -1,5 +1,5 @@
 "use client";
-import { useState, useContext } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
 import Loading from "../../Loading";
 import { SanityContext } from "../../contexts/sanityContext";
 import PostCard from "../../components/PostCard";
@@ -7,6 +7,13 @@ import PostCard from "../../components/PostCard";
 export default function PesquisaContent() {
   const [searchQuery, setSearchQuery] = useState("");
   const sanityContext = useContext(SanityContext);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   if (!sanityContext) {
     return <Loading />;
@@ -26,11 +33,12 @@ export default function PesquisaContent() {
   return (
     <div className="p-4 md:p-12 only-screen">
       <input
+        ref={inputRef}
         type="text"
         placeholder="Procure posts"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="md:w-1/3 w-full mb-4 p-4 rounded-xl input-color"
+        className="w-full mb-4 p-4 rounded-xl input-color"
       />
       <div className="grid grid-cols-1 gap-8 mt-2 xl:grid-cols-2 xl:gap-12">
         {filteredPosts.map((post) => (
