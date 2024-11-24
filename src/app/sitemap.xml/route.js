@@ -46,7 +46,7 @@ export async function GET(request) {
           <loc>${`https://byterealm.vercel.app/posts/${post.slug}`}</loc> 
           <lastmod>${post._updatedAt}</lastmod> 
           <changefreq>yearly</changefreq> 
-          <priority>0.7</priority>
+          <priority>0.9</priority>
         </url>`;
       })
       .join("")} 
