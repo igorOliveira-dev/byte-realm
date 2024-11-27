@@ -1,4 +1,5 @@
 import MainPosts from "./components/MainPosts";
+import MainScreen from "./components/MainScreen";
 
 export const metadata = {
   title: "Home - Byte Realm",
@@ -11,10 +12,7 @@ export const metadata = {
 export default function Home() {
   return (
     <main className="p-4 md:p-12">
-      <h1 className="animated-gradient">
-        Byte Realm <span className="no-necessary">- O seu portal de tecnologia</span>
-      </h1>
-      <h2 className="typewriter">Aqui você encontra as últimas tendências do mundo tecnológico.</h2>
+      <MainScreen />
       <section className="my-6 min-w-full">
         <h2>Principais posts:</h2>
         <MainPosts currentPostId={"/"} />
