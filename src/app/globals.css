@@ -143,12 +143,15 @@ h3 {
     blink 0.75s step-end infinite alternate;
   font-family: monospace;
   width: 27ch;
-  font-size: 30px;
+  font-size: 28px;
 }
 
 @media (width < 525px) {
   .typewriter {
-    width: 90vw;
+    width: 98vw;
+  }
+  .animated-gradient {
+    font-size: 50px;
   }
 }
 
@@ -185,6 +188,12 @@ h3 {
   background-size: 200% 200%;
   animation: text-animation-gradient 4s infinite alternate;
   font-size: 80px;
+}
+
+@media (width < 470px) {
+  .animated-gradient {
+    font-size: 68px;
+  }
 }
 
 @keyframes spin {
