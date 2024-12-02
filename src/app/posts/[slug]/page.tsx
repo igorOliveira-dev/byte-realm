@@ -203,7 +203,7 @@ const PostPage = () => {
       </div>
       <hr />
       <div className="my-6">
-        <h3>Principais posts:</h3>
+        <h3>Posts similares:</h3>
         <SimilarPosts currentPostId={post._id} currentCategory={post.categories[0].title} />
       </div>
     </main>
