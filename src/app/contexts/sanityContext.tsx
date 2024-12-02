@@ -12,6 +12,9 @@ interface Post {
     };
     alt: string;
   };
+  categories: {
+    title: string;
+  }[];
   author: {
     name: string;
     image: {

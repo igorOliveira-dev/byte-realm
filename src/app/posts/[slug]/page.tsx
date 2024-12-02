@@ -8,6 +8,7 @@ import { PortableText, PortableTextProps } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
 import MainPosts from "@/app/components/MainPosts";
+import SimilarPosts from "@/app/components/SimilarPosts";
 
 const builder = imageUrlBuilder(client);
 
@@ -59,6 +60,9 @@ interface Post {
     };
     alt: string;
   };
+  categories: {
+    title: string;
+  }[];
   author: {
     name: string;
     image: {
@@ -92,6 +96,7 @@ const PostPage = () => {
             },
             alt
           },
+          "categories": categories[]->{ title },
           author->{
             name,
             image{
@@ -199,7 +204,7 @@ const PostPage = () => {
       <hr />
       <div className="my-6">
         <h3>Principais posts:</h3>
-        <MainPosts currentPostId={post._id} />
+        <SimilarPosts currentPostId={post._id} currentCategory={post.categories[0].title} />
       </div>
     </main>
   );

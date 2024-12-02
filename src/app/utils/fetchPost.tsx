@@ -13,6 +13,7 @@ export async function fetchPosts() {
           },
           alt
         },
+        "categories": categories[]->{ title },
         author->{
           name,
           image{
