@@ -1,0 +1,24 @@
+.titleBox {
+  text-align: center;
+  & > .title {
+    color: transparent;
+    background-image: linear-gradient(45deg, purple, pink);
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 50px;
+  }
+
+  & > .titleNewsletter {
+    color: var(--foreground);
+    font-size: 30px;
+    letter-spacing: 9px;
+    font-weight: 200;
+  }
+}
+
+.emBreve {
+  color: rgb(169, 0, 0);
+  font-weight: bolder;
+  font-size: 40px;
+  text-align: center;
+}
