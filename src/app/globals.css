@@ -212,3 +212,9 @@ h3 {
 .input-color {
   background-color: var(--strong-transparent-foreground);
 }
+
+.div-center-x {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}

@@ -88,6 +88,9 @@ export default function Header() {
         <a href="/pesquisa" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
           Pesquisa
         </a>
+        <a href="/newsletter" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
+          Newsletter
+        </a>
         <a href="/contato" className="p-4 hover-bg rounded-xl border-b custom-border-color menu-link m-2">
           Contato
         </a>

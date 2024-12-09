@@ -1,0 +1,19 @@
+.title {
+  color: rgba(229, 0, 229, 0.596);
+}
+
+.returnBtn {
+  padding: 10px;
+  background-color: rgba(229, 0, 229, 0.596);
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .returnBtn {
+    background-color: purple;
+  }
+  .title {
+    color: purple;
+  }
+}

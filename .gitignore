@@ -37,3 +37,6 @@ next-env.d.ts
 
 .vercel
 .env
+
+byte-realm.json
+functions

@@ -24,6 +24,12 @@ export async function GET(request) {
       changefreq: "yearly",
       priority: 0.4,
     },
+    {
+      loc: "https://byterealm.vercel.app/newsletter",
+      lastmod: new Date().toISOString(),
+      changefreq: "monthly",
+      priority: 0.7,
+    },
   ];
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?> 

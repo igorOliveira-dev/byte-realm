@@ -41,11 +41,16 @@
 
 .submitBtn {
   padding: 10px;
-  background-color: rgba(229, 0, 229, 0.364);
+  background-color: rgba(229, 0, 229, 0.596);
+  overflow: hidden;
 }
 
 @media (prefers-color-scheme: dark) {
   .submitBtn {
     background-color: purple;
   }
+}
+
+.messages {
+  margin-top: 5px;
 }
