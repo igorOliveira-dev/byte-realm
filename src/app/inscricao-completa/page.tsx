@@ -13,7 +13,7 @@ export default function Page() {
         <p className="mb-2">
           Parabéns por fazer parte do grupo de pessoas mais antenadas no mundo da tecnologia! Estamos muito felizes de tê-lo conosco.
         </p>
-        <p>Agora, todas as terças e sextas você receberá por email as principais tendências tecnológicas atuais!</p>
+        <p>Agora, todas as terças e sextas às 6:00 você receberá por email as principais tendências tecnológicas atuais!</p>
         <Link href="/" type="submit" className={`rounded text-center ${styles.returnBtn}`}>
           Voltar ao blog
         </Link>

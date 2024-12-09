@@ -1,12 +1,19 @@
 "use client";
 
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { saveEmail } from "../../../services/newsletter";
 import styles from "../styles/news.module.css";
 
 export default function NewsletterForm() {
   const [FailMessage, setFailMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -33,6 +40,7 @@ export default function NewsletterForm() {
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <input
+        ref={inputRef}
         type="text"
         name="email"
         placeholder="exemplo@gmail.com"
