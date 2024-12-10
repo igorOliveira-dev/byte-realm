@@ -41,7 +41,7 @@ const PortableTextComponents: PortableTextProps["components"] = {
             alt={value.alt || "Imagem do artigo"}
             width={width}
             height={height}
-            className="h-80 w-auto object-left"
+            className="h-80 w-auto object-left rounded-xl"
             style={{ objectFit: "contain" }}
           />
         </div>
@@ -179,34 +179,36 @@ const PostPage = () => {
   }
 
   return (
-    <main className="p-4 md:mx-24">
-      <header>
-        <h1 className="text-4xl font-bold">{post.title}</h1>
-        <p className="gray-text">{new Date(post.publishedAt).toLocaleDateString("pt-BR")}</p>
-        <div className="flex items-center mt-2">
-          <Image src={post.author.image.asset.url} alt={post.author.name} height={35} width={35} className="rounded-full mr-2" />
-          <p className="font-semibold">{post.author.name}</p>
-        </div>
-        <div className="relative mt-6 flex items-start blog-img-size">
-          <Image
-            width={600}
-            height={300}
-            src={post.mainImage.asset.url}
-            alt={post.mainImage.alt}
-            className="object-fit rounded-xl"
-            priority
-          />
-        </div>
-      </header>
-      <div className="mt-6 post-body">
-        <PortableText value={post.body} components={PortableTextComponents} />
+    <div className="p-4 md:mx-28">
+      <div className="max-w-3xl m-auto">
+        <header>
+          <h1 className="text-4xl font-bold">{post.title}</h1>
+          <p className="gray-text">{new Date(post.publishedAt).toLocaleDateString("pt-BR")}</p>
+          <div className="flex items-center mt-2">
+            <Image src={post.author.image.asset.url} alt={post.author.name} height={35} width={35} className="rounded-full mr-2" />
+            <p className="font-semibold">{post.author.name}</p>
+          </div>
+          <div className="relative mt-6 flex items-start blog-img-size">
+            <Image
+              width={600}
+              height={300}
+              src={post.mainImage.asset.url}
+              alt={post.mainImage.alt}
+              className="object-fit rounded-xl"
+              priority
+            />
+          </div>
+        </header>
+        <main className="mt-6 post-body">
+          <PortableText value={post.body} components={PortableTextComponents} />
+        </main>
       </div>
-      <hr />
-      <div className="my-6">
+      <div>
+        <hr className="my-6" />
         <h3>Posts similares:</h3>
         <SimilarPosts currentPostId={post._id} currentCategory={post.categories[0].title} />
       </div>
-    </main>
+    </div>
   );
 };
 
