@@ -3,6 +3,7 @@ import Image from "next/image";
 import { PortableText, PortableTextProps } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
+import SimilarPosts from "@/app/components/SimilarPosts";
 
 const builder = imageUrlBuilder(client);
 
@@ -171,6 +172,11 @@ export default async function PostPage({ params }: Props) {
         <main className="mt-6 post-body">
           <PortableText value={post.body} components={PortableTextComponents} />
         </main>
+      </div>
+      <div>
+        <hr className="my-6" />
+        <h3>Posts similares:</h3>
+        <SimilarPosts currentPostId={post._id} currentCategory={post.categories[0].title} />
       </div>
     </div>
   );
