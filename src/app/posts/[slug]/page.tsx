@@ -1,14 +1,8 @@
-"use client";
 import { client } from "../../../sanity/lib/client";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import Loading from "../../Loading";
 import Image from "next/image";
 import { PortableText, PortableTextProps } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
-import MainPosts from "@/app/components/MainPosts";
-import SimilarPosts from "@/app/components/SimilarPosts";
 
 const builder = imageUrlBuilder(client);
 
@@ -27,11 +21,8 @@ interface ImageBlock {
 
 const PortableTextComponents: PortableTextProps["components"] = {
   types: {
-    image: ({ value }: { value: ImageBlock }) => {
-      if (!value.asset._ref) {
-        console.error("No asset reference found for image:", value);
-        return null;
-      }
+    image: ({ value }: { value: any }) => {
+      if (!value.asset?._ref) return null;
 
       const { width, height } = getImageDimensions(value.asset);
       return (
@@ -77,105 +68,83 @@ interface Post {
   };
 }
 
-const PostPage = () => {
-  const params = useParams();
+interface Props {
+  params: {
+    slug: string;
+  };
+}
+
+export async function generateMetadata({ params }: Props) {
   const { slug } = params;
-  const [post, setPost] = useState<Post | null>(null);
 
-  useEffect(() => {
-    if (slug) {
-      const fetchPost = async () => {
-        const query = `*[_type == "post" && slug.current == $slug][0] {
-          _id,
-          title,
-          body,
-          mainImage{
-            asset->{
-              _id,
-              url
-            },
-            alt
-          },
-          "categories": categories[]->{ title },
-          author->{
-            name,
-            image{
-              asset->{
-                _id,
-                url
-              }
-            }
-          },
-          publishedAt
-        }`;
-        const post = await client.fetch(query, { slug });
-        setPost(post);
-      };
-      fetchPost();
-    }
-  }, [slug]);
-
-  useEffect(() => {
-    if (post) {
-      const firstParagraph = post.body.find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
-      const secondParagraph =
-        post.body.slice(0).find((block) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
-
-      document.title = `${post.title} - Byte Realm`;
-
-      const oldMetaTags = document.querySelectorAll(
-        'meta[name="description"], meta[property="og:title"], meta[property="og:description"], meta[property="og:image"], meta[name="twitter:card"], meta[name="twitter:title"], meta[name="twitter:description"], meta[name="twitter:image"]'
-      );
-      oldMetaTags.forEach((tag) => tag.parentNode?.removeChild(tag));
-
-      const metaTags = [
-        { name: "description", content: secondParagraph || "" },
-        { property: "og:title", content: post.title || "" },
-        { property: "og:description", content: secondParagraph || "" },
-        { property: "og:image", content: post.mainImage?.asset?.url || "" },
-        { property: "og:type", content: "article" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:title", content: post.title || "" },
-        { name: "twitter:description", content: secondParagraph || "" },
-        { name: "twitter:image", content: post.mainImage?.asset?.url || "" },
-      ];
-
-      metaTags.forEach((meta) => {
-        const tag = document.createElement("meta");
-        if (meta.name) {
-          tag.setAttribute("name", meta.name);
-        } else if (meta.property) {
-          tag.setAttribute("property", meta.property);
-        }
-        tag.setAttribute("content", meta.content);
-        document.head.appendChild(tag);
-      });
-
-      let linkCanonical = document.querySelector('link[rel="canonical"]');
-      if (!linkCanonical) {
-        linkCanonical = document.createElement("link");
-        linkCanonical.setAttribute("rel", "canonical");
-        document.head.appendChild(linkCanonical);
+  const query = `*[_type == "post" && slug.current == $slug][0] {
+    title,
+    body,
+    mainImage {
+      asset->{
+        url
       }
-      linkCanonical.setAttribute("href", window.location.href);
-
-      return () => {
-        document.title = "Byte Realm - O seu portal de tecnologia";
-        metaTags.forEach((meta) => {
-          const tag = document.querySelector(`meta[${meta.name ? "name" : "property"}="${meta.name || meta.property}"]`);
-          if (tag) {
-            document.head.removeChild(tag);
-          }
-        });
-        if (linkCanonical) {
-          document.head.removeChild(linkCanonical);
-        }
-      };
     }
-  }, [post]);
+  }`;
+
+  const post = await client.fetch(query, { slug });
 
   if (!post) {
-    return <Loading />;
+    return {
+      title: "Artigo não encontrado",
+      description: "Esse artigo não existe ou foi removido.",
+    };
+  }
+
+  const firstParagraph = post.body.find((block: any) => block._type === "block" && block.children[0]?.text)?.children[0]?.text || "";
+
+  return {
+    title: `${post.title} - Byte Realm`,
+    description: firstParagraph || "Artigo de tecnologia",
+    openGraph: {
+      title: post.title,
+      description: firstParagraph || "Artigo de tecnologia",
+      images: post.mainImage?.asset?.url || "",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: firstParagraph || "Artigo de tecnologia",
+      images: post.mainImage?.asset?.url || "",
+    },
+  };
+}
+
+export default async function PostPage({ params }: Props) {
+  const { slug } = params;
+
+  const query = `*[_type == "post" && slug.current == $slug][0] {
+    _id,
+    title,
+    body,
+    mainImage {
+      asset->{
+        url
+      },
+      alt
+    },
+    "categories": categories[]->{ title },
+    author->{
+      name,
+      image {
+        asset->{
+          url
+        }
+      }
+    },
+    publishedAt,
+    slug
+  }`;
+
+  const post = await client.fetch(query, { slug });
+
+  if (!post) {
+    return <h1>Artigo não encontrado</h1>;
   }
 
   return (
@@ -203,13 +172,6 @@ const PostPage = () => {
           <PortableText value={post.body} components={PortableTextComponents} />
         </main>
       </div>
-      <div>
-        <hr className="my-6" />
-        <h3>Posts similares:</h3>
-        <SimilarPosts currentPostId={post._id} currentCategory={post.categories[0].title} />
-      </div>
     </div>
   );
-};
-
-export default PostPage;
+}
