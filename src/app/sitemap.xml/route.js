@@ -14,19 +14,19 @@ export async function GET(request) {
     },
     {
       loc: "https://byterealm.vercel.app/contato",
-      lastmod: new Date().toISOString(),
+      lastmod: "2024-12-19",
       changefreq: "yearly",
       priority: 0.4,
     },
     {
       loc: "https://byterealm.vercel.app/politica-privacidade",
-      lastmod: new Date().toISOString(),
+      lastmod: "2024-12-19",
       changefreq: "yearly",
       priority: 0.4,
     },
     {
       loc: "https://byterealm.vercel.app/newsletter",
-      lastmod: new Date().toISOString(),
+      lastmod: "2024-12-19",
       changefreq: "monthly",
       priority: 0.7,
     },
