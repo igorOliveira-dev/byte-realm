@@ -1,33 +1,42 @@
 "use client";
-import { useEffect, useContext, useState } from "react";
-import Loading from "../Loading";
-import { SanityContext } from "../contexts/sanityContext";
-import PostCard from "../components/PostCard";
 
-interface Post {
+import React, { useState } from "react";
+import PostCard from "./PostCard";
+
+export interface Post {
   _id: string;
+  title: string;
   slug: {
     current: string;
   };
+  body: any[];
+  mainImage: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  categories: {
+    title: string;
+  }[];
+  author: {
+    name: string;
+    image: {
+      asset: {
+        url: string;
+      };
+    };
+  };
+  publishedAt: string;
 }
 
 interface MainPostsProps {
+  posts: Post[];
   currentPostId: string;
 }
 
-export default function MainPosts({ currentPostId }: MainPostsProps) {
-  const sanityContext = useContext(SanityContext);
+export default function MainPosts({ posts, currentPostId }: MainPostsProps) {
   const [postsQtd, setPostsQtd] = useState(6);
-
-  if (!sanityContext) {
-    return <Loading />;
-  }
-
-  const { posts, isLoading } = sanityContext;
-
-  if (isLoading) {
-    return <Loading />;
-  }
 
   if (!posts || posts.length === 0) {
     return <p>No posts found</p>;
@@ -37,10 +46,10 @@ export default function MainPosts({ currentPostId }: MainPostsProps) {
     <>
       <div className="grid grid-cols-1 gap-8 mt-2 lg:grid-cols-2 xl:gap-12">
         {posts
-          .filter((post) => post._id !== currentPostId)
+          .filter((p) => p._id !== currentPostId)
           .slice(0, postsQtd)
-          .map((post) => (
-            <PostCard key={post._id} post={post} href={`/posts/${post.slug.current}`} />
+          .map((filteredPost) => (
+            <PostCard key={filteredPost._id} post={filteredPost} href={`/posts/${filteredPost.slug.current}`} />
           ))}
       </div>
       {postsQtd < posts.length && (

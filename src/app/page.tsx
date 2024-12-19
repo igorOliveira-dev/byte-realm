@@ -1,6 +1,34 @@
-import MainPosts from "./components/MainPosts";
+import { fetchPosts } from "./utils/fetchPost";
 import MainScreen from "./components/MainScreen";
 import NewsletterBanner from "./components/NewsletterBanner";
+import MainPosts from "./components/MainPosts";
+
+export interface Post {
+  _id: string;
+  title: string;
+  slug: {
+    current: string;
+  };
+  body: any[];
+  mainImage: {
+    asset: {
+      url: string;
+    };
+    alt: string;
+  };
+  categories: {
+    title: string;
+  }[];
+  author: {
+    name: string;
+    image: {
+      asset: {
+        url: string;
+      };
+    };
+  };
+  publishedAt: string;
+}
 
 export const metadata = {
   title: "Home - Byte Realm",
@@ -10,14 +38,16 @@ export const metadata = {
   },
 };
 
-export default function Home() {
+export default async function Home() {
+  const posts: Post[] = await fetchPosts();
+
   return (
     <main className="p-4 md:p-12">
       <MainScreen />
       <NewsletterBanner />
       <section className="my-6 min-w-full">
         <h2>Principais posts:</h2>
-        <MainPosts currentPostId={"/"} />
+        <MainPosts posts={posts} currentPostId={"/"} />
       </section>
     </main>
   );
