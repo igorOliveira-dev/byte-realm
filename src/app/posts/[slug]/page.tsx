@@ -21,6 +21,12 @@ interface ImageBlock {
   alt?: string;
 }
 
+interface LinkBlock {
+  _type: "link";
+  href: string;
+  text: string;
+}
+
 const PortableTextComponents: PortableTextProps["components"] = {
   types: {
     image: ({ value }: { value: any }) => {
@@ -38,6 +44,14 @@ const PortableTextComponents: PortableTextProps["components"] = {
             style={{ objectFit: "contain" }}
           />
         </div>
+      );
+    },
+    link: ({ value }: { value: LinkBlock }) => {
+      if (!value?.href) return null;
+      return (
+        <a href={value.href} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+          {value.text || value.href}
+        </a>
       );
     },
   },
