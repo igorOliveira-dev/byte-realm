@@ -23,8 +23,8 @@
     "next": "14.2.15",
     "next-sanity": "^9.8.29",
     "nodemailer": "^6.9.16",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "sanity": "^3.62.2",
     "styled-components": "^6.1.13",
     "vercel": "^37.11.0"
