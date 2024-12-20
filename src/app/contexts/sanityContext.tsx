@@ -1,33 +1,7 @@
 "use client";
 import { createContext, useState, useEffect } from "react";
 import { fetchPosts } from "../utils/fetchPost";
-
-interface Post {
-  _id: string;
-  title: string;
-  body: any[];
-  mainImage: {
-    asset: {
-      url: string;
-    };
-    alt: string;
-  };
-  categories: {
-    title: string;
-  }[];
-  author: {
-    name: string;
-    image: {
-      asset: {
-        url: string;
-      };
-    };
-  };
-  publishedAt: string;
-  slug: {
-    current: string;
-  };
-}
+import { Post } from "../types/Post";
 
 interface SanityContextType {
   posts: Post[];

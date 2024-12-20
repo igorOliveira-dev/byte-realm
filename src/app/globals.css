@@ -33,25 +33,28 @@ body {
   margin: 0;
 }
 
-.post-body > p {
-  margin-bottom: 10px;
+.post-body {
+  & > h2 {
+    font-size: 30px;
+  }
+  & > p {
+    margin-bottom: 10px;
+    & > a {
+      color: var(--gray);
+      text-decoration: underline;
+    }
+  }
+  & > ul {
+    list-style-type: disc;
+    & > li {
+      margin: 6px;
+    }
+  }
 }
 
 .only-screen {
   min-height: calc(100vh - (152px));
   overflow-y: hidden;
-}
-
-.post-body > ul {
-  list-style-type: disc;
-}
-
-.post-body > ul > li {
-  margin: 6px;
-}
-
-.post-body > h2 {
-  font-size: 30px;
 }
 
 @layer utilities {

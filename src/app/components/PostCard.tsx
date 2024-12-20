@@ -27,7 +27,10 @@ interface Post {
 const PostCard = ({ post, href }: { post: Post; href: string }) => {
   return (
     <Link href={href}>
-      <div key={post._id} className="p-4 cursor-pointer hover-bg transition-all border border-2 custom-border-color rounded-xl">
+      <div
+        key={post._id}
+        className="p-4 cursor-pointer hover-bg transition-all border border-2 custom-border-color rounded-xl post-card"
+      >
         <img src={post.mainImage.asset.url} alt={post.mainImage.alt} className="w-full h-48 object-cover" />
         <div className="p-4">
           <h3 className="text-xl font-bold">{post.title}</h3>

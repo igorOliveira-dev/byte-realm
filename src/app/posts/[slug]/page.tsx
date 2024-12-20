@@ -4,6 +4,7 @@ import { PortableText, PortableTextProps } from "@portabletext/react";
 import { getImageDimensions } from "@sanity/asset-utils";
 import imageUrlBuilder from "@sanity/image-url";
 import SimilarPosts from "@/app/components/SimilarPosts";
+import { Post } from "../../types/Post";
 
 const builder = imageUrlBuilder(client);
 
@@ -41,33 +42,6 @@ const PortableTextComponents: PortableTextProps["components"] = {
     },
   },
 };
-
-interface Post {
-  _id: string;
-  title: string;
-  body: any[];
-  mainImage: {
-    asset: {
-      url: string;
-    };
-    alt: string;
-  };
-  categories: {
-    title: string;
-  }[];
-  author: {
-    name: string;
-    image: {
-      asset: {
-        url: string;
-      };
-    };
-  };
-  publishedAt: string;
-  slug: {
-    current: string;
-  };
-}
 
 interface Props {
   params: {
