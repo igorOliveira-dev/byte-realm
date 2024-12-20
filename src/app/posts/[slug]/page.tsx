@@ -108,27 +108,41 @@ export default async function PostPage({ params }: Props) {
   const { slug } = params;
 
   const query = `*[_type == "post" && slug.current == $slug][0] {
-    _id,
-    title,
-    body,
-    mainImage {
+  _id,
+  title,
+  body[] {
+    ...,
+    markDefs[] {
+      _key,
+      _type,
+      href
+    },
+    children[] {
+      _key,
+      _type,
+      text,
+      marks
+    }
+  },
+  mainImage {
+    asset->{
+      url
+    },
+    alt
+  },
+  "categories": categories[]->{ title },
+  author->{
+    name,
+    image {
       asset->{
         url
-      },
-      alt
-    },
-    "categories": categories[]->{ title },
-    author->{
-      name,
-      image {
-        asset->{
-          url
-        }
       }
-    },
-    publishedAt,
-    slug
-  }`;
+    }
+  },
+  publishedAt,
+  slug
+}
+`;
 
   const post = await client.fetch(query, { slug });
 
